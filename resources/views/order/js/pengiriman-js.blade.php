@@ -33,12 +33,7 @@
                         cache: false,
                         processData: false,
                         success: function(result) {
-                            Swal.fire({
-                                title: 'Success',
-                                text: 'Form has been stored',
-                                icon: 'success',
-                                showConfirmButton: false,
-                            })
+                            showSuccessCheck();
                             setTimeout(function() {
                                 swal.close();
                             }, 1500);

@@ -23,6 +23,8 @@ class PeopleController extends Controller
     {
         $peopleM = new People();
         $data['people'] = $peopleM->with(['journals', 'self_journals'])->where('slug', $slug)->first();
+        abort_if($data['people'] == null, 404);
+
         return view('pages.peopledetail', $data);
     }
 

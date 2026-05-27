@@ -1,9 +1,9 @@
 @section('footer')
     <footer class="main-footer">
-        <strong>Copyright &copy; {{ date('Y') }} <a href="http://adminlte.io">Geo Mechanics ITB</a>.</strong>
+        <strong>Copyright &copy; {{ date('Y') }} Lab Geo Mekanika ITB.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 1.0.1
+            <b>Version</b> 1.2
         </div>
     </footer>
 
@@ -43,6 +43,18 @@
     <script src="{{ URL::asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js ') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ URL::asset('admin/dist/js/adminlte.js ') }}"></script>
+    <script>
+        $(function() {
+            $('body').addClass('sidebar-collapse');
+
+            $('.main-sidebar').on('mouseleave', function() {
+                $('body').addClass('sidebar-collapse').removeClass('sidebar-open');
+            });
+
+            $('.content-header .breadcrumb').closest('.col-sm-6').addClass('admin-header-actions').empty();
+            $('#button_tambah').first().appendTo('.admin-header-actions').removeClass('mb-4 mr-2');
+        });
+    </script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ URL::asset('admin/dist/js/pages/dashboard.js ') }}"></script>
     <!-- AdminLTE for demo purposes -->

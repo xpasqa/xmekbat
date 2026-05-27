@@ -7,7 +7,9 @@
     <script>
         $(document).ready(function() {
             $('.side-nav-link').click(function(e) {
-                e.preventDefault();
+                if ($(this).attr('href') == 'javascript:void(0)') {
+                    e.preventDefault();
+                }
             });
             checkForm(
                 $('#project_name').val(),
@@ -138,11 +140,7 @@
                     cache: false,
                     processData: false,
                     success: function(result) {
-                        Swal.fire({
-                            title: 'Success',
-                            icon: 'success',
-                            showConfirmButton: false,
-                        })
+                        showSuccessCheck();
                         setTimeout(function() {
                             swal.close();
                         }, 1500);

@@ -46,8 +46,12 @@ function indonesianDateFormat($tanggal)
 
 function calculatePercentage($total, $value)
 {
+    if ($total == 0) {
+        return 0;
+    }
+
     $percentage = ($value / $total) * 100;
-    return $percentage;
+    return round($percentage);
 }
 
 function dataPaging($totalData, $current_page, $limit)

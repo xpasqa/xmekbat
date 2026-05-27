@@ -33,5 +33,19 @@
                 <span class="mx-2 side-link">{{ $item['label'] }}</span>
             </a>
         @endforeach
+        <li>
+            <div class="sidebar-support">
+                <div class="sidebar-support-icon">
+                    <span class="fa fa-headphones"></span>
+                </div>
+                <div class="sidebar-support-copy">
+                    <strong>Need help?</strong>
+                    <span>Our support team is ready to assist you.</span>
+                </div>
+                <a href="https://wa.me/0856" target="_blank" rel="noopener" class="btn sidebar-support-button">
+                    Contact Support
+                </a>
+            </div>
+        </li>
     </ul>
 </div>

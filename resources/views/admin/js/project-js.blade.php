@@ -717,6 +717,31 @@
 
                 var numbering = 0;
                 var project_id = 0;
+
+                function addPreparasiRow(rowData = {}) {
+                    function cellValue(field) {
+                        return rowData[field] !== undefined && rowData[field] !== null ? rowData[field] : '';
+                    }
+
+                    numbering++;
+                    $(".total").remove();
+                    var rowcontent =
+                        '<tr><td>' + numbering +
+                        '</td><td><input type="text" class="form-control" name="sample_code[]" value="' + cellValue('sample_code') + '"/></td>' +
+                        '<td><input type="text" class="form-control" name="depth[]" value="' + cellValue('depth') + '"/></td>' +
+                        '<td><input type="text" class="form-control" name="length[]" value="' + cellValue('length') + '"/></td>' +
+                        '<td><input type="text" class="form-control" name="lithology[]" value="' + cellValue('lithology') + '"/></td>' +
+                        '<td><input type="number" class="form-control" name="pp[]" value="' + cellValue('pp') + '"/></td>' +
+                        '<td><input type="number" class="form-control" name="ucs[]" value="' + cellValue('ucs') + '"/></td>' +
+                        '<td><input type="number" class="form-control" name="ds[]" value="' + cellValue('ds') + '"/></td>' +
+                        '<td><input type="number" class="form-control" name="uv[]" value="' + cellValue('uv') + '"/></td>' +
+                        '<td><input type="number" class="form-control" name="pli[]" value="' + cellValue('pli') + '"/></td>' +
+                        '<td><input type="number" class="form-control" name="bz[]" value="' + cellValue('bz') + '"/></td>' +
+                        '<td><input type="number" class="form-control" name="tx[]" value="' + cellValue('tx') + '"/></td>' +
+                        '<td><input type="text" class="form-control" name="notice[]" value="' + cellValue('notice') + '"/></td></tr>';
+                    $("#notice-body").append(rowcontent);
+                }
+
                 $("#example3").on("click", ".status", function() {
                     numbering = 0;
                     var id_project = $(this).data('id_project');
@@ -754,36 +779,7 @@
                                 $("#image-modal").prepend(imagecontent);
                             })
                             result.data.forEach((item, index) => {
-                                numbering++;
-                                var rowcontent =
-                                    '<tr><td>' + numbering +
-                                    '</td><td><input type="text" class="form-control" name="sample_code[]" value="' +
-                                    item.sample_code + '" /></td>' +
-                                    '<td><input type="text" class="form-control" name="depth[]" value="' +
-                                    item.depth + '"/></td>' +
-                                    '<td><input type="text" class="form-control" name="length[]" value="' +
-                                    item.length + '"/></td>' +
-                                    '<td><input type="text" class="form-control" name="lithology[]" value="' +
-                                    item.lithology + '"/></td>' +
-                                    '<td><input type="number" class="form-control" name="pp[]" value="' +
-                                    item.pp + '"/></td>' +
-                                    '<td><input type="number" class="form-control" name="ucs[]" value="' +
-                                    item.ucs + '"/></td>' +
-                                    '<td><input type="number" class="form-control" name="ds[]" value="' +
-                                    item.ds + '"/></td>' +
-                                    '<td><input type="number" class="form-control" name="uv[]" value="' +
-                                    item.uv + '"/></td>' +
-                                    '<td><input type="number" class="form-control" name="pli[]" value="' +
-                                    item.pli + '"/></td>' +
-                                    '<td><input type="number" class="form-control" name="bz[]" value="' +
-                                    item.bz + '"/></td>' +
-                                    '<td><input type="number" class="form-control" name="tx[]" value="' +
-                                    item.tx + '"/></td>' +
-                                    '<td><input type="text" class="form-control" name="notice[]" value="' +
-                                    item.notice + '"/></td></tr>';
-                                var totalcontent =
-                                    '<tr class="bg-bluelight total"><th colspan="5" class="text-center">Total tested</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th></th></tr>';
-                                $("#notice-body").append(rowcontent);
+                                addPreparasiRow(item);
                             })
                         },
                         error: function(error) {
@@ -795,26 +791,11 @@
                 });
 
                 $("#notice-table").dblclick(function() {
-                    console.log('triggered');
-                    numbering++;
-                    $(".total").remove();
-                    var rowcontent =
-                        '<tr><td>' + numbering +
-                        '</td><td><input type="text" class="form-control" name="sample_code[]"/></td>' +
-                        '<td><input type="text" class="form-control" name="depth[]"/></td>' +
-                        '<td><input type="text" class="form-control" name="length[]"/></td>' +
-                        '<td><input type="text" class="form-control" name="lithology[]"/></td>' +
-                        '<td><input type="number" class="form-control" name="pp[]"/></td>' +
-                        '<td><input type="number" class="form-control" name="ucs[]"/></td>' +
-                        '<td><input type="number" class="form-control" name="ds[]"/></td>' +
-                        '<td><input type="number" class="form-control" name="uv[]"/></td>' +
-                        '<td><input type="number" class="form-control" name="pli[]"/></td>' +
-                        '<td><input type="number" class="form-control" name="bz[]"/></td>' +
-                        '<td><input type="number" class="form-control" name="tx[]"/></td>' +
-                        '<td><input type="text" class="form-control" name="notice[]"/></td></tr>';
-                    var totalcontent =
-                        '<tr class="bg-bluelight total"><th colspan="5" class="text-center">Total tested</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th>1</th><th></th></tr>';
-                    $("#notice-body").append(rowcontent);
+                    addPreparasiRow();
+                });
+
+                $("#add-sample-code").click(function() {
+                    addPreparasiRow();
                 });
 
                 $("#clear-delete").click(function() {
@@ -1229,7 +1210,16 @@
                             var notes;
                             var total_sample = 0;
                             var total_selesai_test = 0;
+                            function percentageDone(done, total) {
+                                if (total == 0) {
+                                    return 0;
+                                }
+
+                                return Math.round((done / total) * 100);
+                            }
+
                             result.data.forEach((item, index) => {
+                                var sample_total = item.quantity * item.sample.sample_rates;
                                 if (item.labtest == null) {
                                     selesai_qty = 0;
                                     notes = '-';
@@ -1241,27 +1231,22 @@
                                 var rowcontent =
                                     '<tr><td>' + numbering2 + '</td>' +
                                     '<td>' + item.sample.name + '</td>' +
-                                    '<td>' + (item.quantity * item.sample
-                                        .sample_rates) + '</td>' +
+                                    '<td>' + sample_total + '</td>' +
                                     '<td><input type="text" class="form-control" name="selesai_qty[]" value="' +
                                     selesai_qty +
                                     '" /> <input type="hidden" class="form-control" name="id_order[]" value="' +
                                     item.id_order + '" /></td>' +
-                                    '<td>' + selesai_qty / (item.quantity * item.sample
-                                        .sample_rates) * 100 +
-                                    '</td>' +
+                                    '<td>' + percentageDone(selesai_qty, sample_total) + '</td>' +
                                     '<td><input type="text" class="form-control" name="catatan[]" value="' +
                                     notes + '" /></td></tr>';
                                 $("#notice-body2").append(rowcontent);
-                                total_sample += (item.quantity * item.sample
-                                    .sample_rates);
+                                total_sample += sample_total;
                                 total_selesai_test += selesai_qty;
                             })
                             var totalcontent =
                                 '<tr class="bg-bluelight total"><th colspan="2" class="text-center">Total tested</th><th>' +
                                 total_sample + '</th><th>' + total_selesai_test +
-                                '</th><th colspan="2" id="grand-total">' + total_selesai_test /
-                                total_sample * 100 + '</th></tr>';
+                                '</th><th colspan="2" id="grand-total">' + percentageDone(total_selesai_test, total_sample) + '</th></tr>';
                             $("#notice-body2").append(totalcontent);
                         },
                         error: function(error) {

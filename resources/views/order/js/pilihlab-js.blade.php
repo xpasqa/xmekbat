@@ -36,12 +36,7 @@
                         cache: false,
                         processData: false,
                         success: function(result) {
-                            Swal.fire({
-                                title: 'Success',
-                                text: 'Form has been stored',
-                                icon: 'success',
-                                showConfirmButton: false,
-                            })
+                            showSuccessCheck();
                             setTimeout(function() {
                                 swal.close();
                             }, 1500);
@@ -65,6 +60,7 @@
         function checkBox() {
             $('.form-check-input').change(function() {
                 if ($(this).is(":checked")) {
+                    $(this).closest(".test-row").addClass("selected");
                     var id = $(this).attr("id");
                     arrayObject.push({
                         id_sample: $(this).attr("id"),
@@ -94,6 +90,7 @@
                         qtyChange(id);
                     });
                 } else {
+                    $(this).closest(".test-row").removeClass("selected");
                     let find = arrayObject.filter(data => data.id_sample == $(this).attr("id"));
                     if (find.length > 0) {
                         let index = arrayObject.indexOf(find[0]);

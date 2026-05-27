@@ -1,9 +1,9 @@
 @section('sidebar')
 <aside class="main-sidebar sidebar-dark-primary bg-blueprimary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{route('admin.index')}}" class="brand-link">
-        <img src="{{ URL::asset('admin/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Admin ITB</span>
+    <a href="{{route('admin.index')}}" class="brand-link admin-brand-link">
+        <span class="brand-initial">LM</span>
+        <span class="brand-text font-weight-bold">Lab Mekbat</span>
     </a>
 
     <!-- Sidebar -->
@@ -111,6 +111,12 @@
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
+        <div class="sidebar-logout">
+            <a href="{{ route('auth.logout') }}" class="nav-link">
+                <i class="nav-icon fas fa-door-open"></i>
+                <p>Logout</p>
+            </a>
+        </div>
     </div>
     <!-- /.sidebar -->
 </aside>

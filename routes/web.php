@@ -243,4 +243,14 @@ Route::group(['prefix' => 'order', 'middleware' => 'auth'], function(){
     Route::post('/add-single', [OrderController::class, 'addData'])->name('order.addData');
 });
 
+Route::get('/storage/{path}', function ($path) {
+    $file = storage_path('app/public/' . $path);
+
+    if (!file_exists($file) || !is_file($file)) {
+        abort(404);
+    }
+
+    return response()->file($file);
+})->where('path', '.*');
+
 Route::get('/{slug}', [PeopleController::class, 'peopleDetail'])->name('people.peopleDetail');

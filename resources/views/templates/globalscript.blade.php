@@ -76,7 +76,7 @@
                 }
             });
             $(".people-img").click(function() {
-                var url = $(this).attr("alt");
+                var url = $(this).data("url");
                 if (url != null && url != "") {
                     window.open(url, '_blank');
                 }

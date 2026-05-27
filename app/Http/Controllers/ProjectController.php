@@ -221,25 +221,25 @@ class ProjectController extends Controller
         $bz = json_decode($request->bz);
         $tx = json_decode($request->tx);
         $notice = json_decode($request->notice);
+
+        Preparing::where('id_project', $request->id_project)->delete();
+
         for($i=0; $i<$arr_length; $i++){
-            $preparingCheck = Preparing::where('id_project', $request->id_project)->where('sample_code', $sample_code_arr[$i])->first();
-            if($preparingCheck == null){
-                $preparingM = new Preparing();
-                $preparingM->id_project = $request->id_project;
-                $preparingM->sample_code = $sample_code_arr[$i];
-                $preparingM->depth = $depth[$i];
-                $preparingM->length = $length[$i];
-                $preparingM->lithology = $lithology[$i];
-                $preparingM->pp = intval($pp[$i]);
-                $preparingM->ucs = intval($ucs[$i]);
-                $preparingM->ds = intval($ds[$i]);
-                $preparingM->uv = intval($uv[$i]);
-                $preparingM->pli = intval($pli[$i]);
-                $preparingM->bz = intval($bz[$i]);
-                $preparingM->tx = intval($tx[$i]);
-                $preparingM->notice = $notice[$i];
-                $preparingM->save();
-            }
+            $preparingM = new Preparing();
+            $preparingM->id_project = $request->id_project;
+            $preparingM->sample_code = $sample_code_arr[$i];
+            $preparingM->depth = $depth[$i];
+            $preparingM->length = $length[$i];
+            $preparingM->lithology = $lithology[$i];
+            $preparingM->pp = intval($pp[$i]);
+            $preparingM->ucs = intval($ucs[$i]);
+            $preparingM->ds = intval($ds[$i]);
+            $preparingM->uv = intval($uv[$i]);
+            $preparingM->pli = intval($pli[$i]);
+            $preparingM->bz = intval($bz[$i]);
+            $preparingM->tx = intval($tx[$i]);
+            $preparingM->notice = $notice[$i];
+            $preparingM->save();
         }
         $checkNotes = Notes::where('id_project', $request->id_project)->first();
         if($checkNotes == null)

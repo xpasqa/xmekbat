@@ -287,6 +287,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger mr-auto" id="clear-delete">Clear Table</button>
+                <button type="button" class="btn btn-outline-secondary" id="add-sample-code">Add Sample Code</button>
                 <button type="button" class="btn btn-outline-primary" id="button-simpan">Simpan</button>
                 <button type="button" class="btn btn-primary" id="button-proceed">Proceed</button>
             </div>

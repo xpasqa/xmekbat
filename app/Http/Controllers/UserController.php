@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    private function sidebarProgress($step)
+    {
+        return min(100, (($step + 1) / 8) * 100);
+    }
+
     public function index()
     {
         $projectM = new Project();
@@ -24,8 +29,12 @@ class UserController extends Controller
 
     public function informasi()
     {
-        $data['sidebar_step'] = 1;
-        $data['sidebar_progress'] = 12.5;  
+        $project = Project::where('id_project', Session::get('id_project'))
+            ->where('id_user', Auth::user()->id)
+            ->first();
+
+        $data['sidebar_step'] = $project ? $project->sidebar_step : 0;
+        $data['sidebar_progress'] = $this->sidebarProgress($data['sidebar_step']);
         return view('order.informasi', $data);
     }
 
@@ -37,7 +46,7 @@ class UserController extends Controller
         $data['project'] = $projectM->find(Session::get('id_project'));
         $data['sample'] = $sampleM->where('type', 'Sample')->where('display', 'Show')->get();
         $data['sidebar_step'] = $data['project']->sidebar_step;
-        $data['sidebar_progress'] = 25;   
+        $data['sidebar_progress'] = $this->sidebarProgress($data['sidebar_step']);
         return view('order.pilihlab', $data);
     }
 
@@ -52,7 +61,7 @@ class UserController extends Controller
         $data['project'] = $projectM->find(Session::get('id_project'));
 
         $data['sidebar_step'] = $data['project']->sidebar_step;
-        $data['sidebar_progress'] = 37.5;    
+        $data['sidebar_progress'] = $this->sidebarProgress($data['sidebar_step']);
         return view ('order.quotation', $data);
     }
 
@@ -61,7 +70,7 @@ class UserController extends Controller
         $projectM = new Project();
         $data['project'] = $projectM->find(Session::get('id_project'));
         $data['sidebar_step'] = $data['project']->sidebar_step;
-        $data['sidebar_progress'] = 50;
+        $data['sidebar_progress'] = $this->sidebarProgress($data['sidebar_step']);
         return view('order.pengiriman', $data);
     }
 
@@ -73,7 +82,7 @@ class UserController extends Controller
         $data['images'] = PreparingImage::where('id_project', $id_project)->get();
         $data['project'] = Project::where('id_project', $id_project)->first();
         $data['sidebar_step'] = $data['project']->sidebar_step;
-        $data['sidebar_progress'] = 62.5; 
+        $data['sidebar_progress'] = $this->sidebarProgress($data['sidebar_step']);
         return view('order.preparasi', $data);
     }
 
@@ -98,7 +107,7 @@ class UserController extends Controller
         $data['total_sample'] = $total_sample;
         $data['total_selesai'] = $total_selesai;
         $data['sidebar_step'] = $data['proj']->sidebar_step;
-        $data['sidebar_progress'] = 75;  
+        $data['sidebar_progress'] = $this->sidebarProgress($data['sidebar_step']);
         return view('order.labtest', $data);
     }
 
@@ -107,7 +116,7 @@ class UserController extends Controller
         $projectM = new Project();
         $data['project'] = $projectM->find(Session::get('id_project'));
         $data['sidebar_step'] = $data['project']->sidebar_step;
-        $data['sidebar_progress'] = 87.5;  
+        $data['sidebar_progress'] = $this->sidebarProgress($data['sidebar_step']);
         return view('order.invoice', $data);
     }
 
@@ -117,7 +126,7 @@ class UserController extends Controller
         $data['project'] = Project::with(['hasil_image'])->find(Session::get('id_project'));
 
         $data['sidebar_step'] = $data['project']->sidebar_step;
-        $data['sidebar_progress'] = 100;
+        $data['sidebar_progress'] = $this->sidebarProgress($data['sidebar_step']);
         $data['survey'] = $survey;
         return view('order.download', $data);
     }

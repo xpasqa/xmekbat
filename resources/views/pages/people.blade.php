@@ -43,10 +43,10 @@
                         @endphp
                         <div class="row my-5 justify-content-around align-items-center">
                             <div class="col-md-2">
-                                <img src="{{ url('storage/people/'.$row->image) }}" width="100%" class="people-img" alt="{{ $row->name }}">
+                                <img src="{{ url('storage/people/'.$row->image) }}" width="100%" class="people-img" data-url="{{ $peopleDetailUrl }}" alt="{{ $row->name }}">
                             </div>
                             <div class="col-md-8">
-                                <h5 class="title m-0 p-0 people-img">{{ $row->name }}</h5>
+                                <h5 class="title m-0 p-0 people-img" data-url="{{ $peopleDetailUrl }}">{{ $row->name }}</h5>
                                 <p class="subtitle mb-3 p-0">{{ $row->position }}</p>
                                 <p class="">
                                     {{ truncate($row->description, 450) }}
