@@ -1,0 +1,15 @@
+.modal-dialog-big {
+    max-width: 80%;
+}
+
+.bg-grey {
+    background-color: rgb(212, 212, 212);
+}
+
+.bg-bluelight {
+    background-color: #a4cbfa;
+}
+
+.bg-blueprimary {
+    background-color: #005aab !important;
+}

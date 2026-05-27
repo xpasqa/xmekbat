@@ -1,0 +1,27 @@
+cat >> .gitignore <<'EOF'
+
+# macOS
+.DS_Store
+
+# Laravel runtime files
+storage/logs/*.log
+storage/framework/sessions/*
+storage/framework/views/*
+storage/framework/cache/*
+
+# Keep Laravel folders
+!storage/framework/sessions/.gitignore
+!storage/framework/views/.gitignore
+!storage/framework/cache/.gitignore
+
+# Backups / database dumps
+*.zip
+*.sql
+*.dump
+*.tar
+*.tar.gz
+
+# Local Docker
+Dockerfile
+docker-compose.yml
+EOF

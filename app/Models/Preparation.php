@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Preparation extends Model
+{
+    use HasFactory;
+    protected $table = 'preparation';
+    protected $primaryKey = 'id_sample';
+    protected $fillable = [
+        "name",
+        "price_rates",
+        "sample_rates",
+    ];
+}
