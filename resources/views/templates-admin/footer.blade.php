@@ -1,6 +1,6 @@
 @section('footer')
     <footer class="main-footer">
-        <strong>Copyright &copy; 2022 <a href="http://adminlte.io">Geo Mechanics ITB</a>.</strong>
+        <strong>Copyright &copy; {{ date('Y') }} <a href="http://adminlte.io">Geo Mechanics ITB</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 1.0.1

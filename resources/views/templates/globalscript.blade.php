@@ -241,7 +241,19 @@
                                 text: 'Your account successfully created',
                                 icon: 'success',
                                 showConfirmButton: false,
+                                timer: 1500,
                             })
+                            setTimeout(function() {
+                                $("#modal_register").modal("hide");
+                                $("#name_register").val('');
+                                $("#email_register").val('');
+                                $("#password_register").val('');
+                                $("#confirm_password").val('');
+                                $('#email_msg').hide();
+                                $('#password_msg').hide();
+                                $('.modal-backdrop').remove();
+                                $('body').removeClass('modal-open').removeAttr('style');
+                            }, 1500);
                         },
                         error: function(error) {
                             Swal.fire({

@@ -144,6 +144,18 @@
 .side-link {
     font-size: 0.85em;
 }
+.sidebar-step-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+}
+
+.sidebar-step-icon img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
 .pcard {
     font-size: 14px;
 }

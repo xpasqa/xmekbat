@@ -29,6 +29,14 @@
             statusTable();
             listener();
 
+            $('a[data-toggle="pill"]').on('shown.bs.tab', function() {
+                $.fn.dataTable
+                    .tables({
+                        visible: true,
+                        api: true
+                    })
+                    .columns.adjust();
+            });
 
             //Sample Modal
             $("#example1").on("click", ".status", function() {
