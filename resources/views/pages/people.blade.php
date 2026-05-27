@@ -37,17 +37,22 @@
 
                     @foreach ($people as $row)
                         <!-- people 1 -->
+                        @php
+                            $peopleSlug = trim((string) $row->slug);
+                            $peopleDetailUrl = $peopleSlug !== '' ? route('people.peopleDetail', ['slug' => $peopleSlug]) : null;
+                        @endphp
                         <div class="row my-5 justify-content-around align-items-center">
                             <div class="col-md-2">
-                                <img src="{{url('storage/people/'.$row->image.'')}}" width="100%" class="people-img" alt="{{ route('people.peopleDetail', ['slug' => $row->slug]) }}">
+                                <img src="{{ url('storage/people/'.$row->image) }}" width="100%" class="people-img" alt="{{ $row->name }}">
                             </div>
                             <div class="col-md-8">
-                                <h5 class="title m-0 p-0 people-img" alt="{{ route('people.peopleDetail', ['slug' => $row->slug]) }}">{{$row->name}}</h5>
-                                <p class="subtitle mb-3 p-0">{{$row->position}}</p>
+                                <h5 class="title m-0 p-0 people-img">{{ $row->name }}</h5>
+                                <p class="subtitle mb-3 p-0">{{ $row->position }}</p>
                                 <p class="">
                                     {{ truncate($row->description, 450) }}
-                                    <a href="{{ route('people.peopleDetail', ['slug' => $row->slug]) }}" class="text-decoration-none text-italic">Learn
-                                        More</a>
+                                    @if ($peopleDetailUrl)
+                                        <a href="{{ $peopleDetailUrl }}" class="text-decoration-none text-italic">Learn More</a>
+                                    @endif
                                 </p>
                             </div>
                         </div>
